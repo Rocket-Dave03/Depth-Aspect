@@ -1,0 +1,35 @@
+{
+  "criteria":
+  {
+    "trigger1":
+    {
+      "trigger": "minecraft:play_hurt_entity",
+      "conditions":
+      {
+        "entity":
+        {
+          "type": "minecraft:cow"
+        }
+      }
+    }
+  },
+  "requirements":
+  [
+    ["trigger1"]
+  ],
+  "display":
+  {
+    "icon":
+    {
+      "item": "depth_aspect:requis",
+      "nbt": "{}"
+    },
+    "title": "Why did you do that?",
+    "description": "Grindstone a Enchanted Golden Apple",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "minecraft:adventure/root"
+}

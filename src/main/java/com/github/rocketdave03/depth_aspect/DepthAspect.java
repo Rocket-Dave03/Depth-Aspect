@@ -9,12 +9,12 @@ import net.minecraft.util.registry.Registry;
 
 public class DepthAspect implements ModInitializer {
 
-	public static final Item Test = new Item(new FabricItemSettings().group(ItemGroup.MISC));
+	public static final Item REQUIS = new Item(new FabricItemSettings().group(ItemGroup.MISC));
 
 	@Override
 	public void onInitialize() {
 		System.out.println("Hello Fabric world!");
 
-		Registry.register(Registry.ITEM, new Identifier("tutorial", "fabric_item"), Test);
+		Registry.register(Registry.ITEM, new Identifier("depth_aspect", "requis"), REQUIS);
 	}
 }
