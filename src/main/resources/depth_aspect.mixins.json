@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "DepthAspect"
+    "GoldenAppleIsEnchanted",
+    "GrindGoldenApple"
   ],
   "injectors": {
     "defaultRequire": 1

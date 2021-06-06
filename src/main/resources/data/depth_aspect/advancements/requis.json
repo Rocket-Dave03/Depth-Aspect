@@ -1,0 +1,36 @@
+{
+  "parent": "minecraft:adventure/root",
+  "display": {
+    "title": {
+      "text": "Why did you do that?"
+    },
+    "description": {
+      "text": "Description"
+    },
+    "icon": {
+      "item": "depth_aspect:requis"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true,
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+  },
+  "criteria": {
+    "test": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "depth_aspect:requis"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "test"
+    ]
+  ]
+}

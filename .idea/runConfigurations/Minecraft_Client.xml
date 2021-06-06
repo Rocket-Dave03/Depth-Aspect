@@ -1,9 +1,10 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Minecraft Client" type="Application" factoryName="Application">
+  <configuration default="false" name="Minecraft Client" type="Application" factoryName="Application" activateToolWindowBeforeRun="false">
+    <option name="ALTERNATIVE_JRE_PATH" value="openjdk-16" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="MAIN_CLASS_NAME" value="net.fabricmc.devlaunchinjector.Main" />
-    <module name="Depth Aspect.main" />
-    <option name="PROGRAM_PARAMETERS" value="" />
-    <option name="VM_PARAMETERS" value="-Dfabric.dli.config=/home/rocketdave/Documents/Code/Personal@@0020Projects/Minecraft/Mods/Depth@@0020Aspect/.gradle/loom-cache/launch.cfg -Dfabric.dli.env=client -Dfabric.dli.main=net.fabricmc.loader.launch.knot.KnotClient" />
+    <module name="Depth_Aspect.main" />
+    <option name="VM_PARAMETERS" value="-Dfabric.dli.config=$PROJECT_DIR$/../../../../Personal@@0020Projects/Minecraft/Mods/Depth@@0020Aspect/.gradle/loom-cache/launch.cfg -Dfabric.dli.env=client -Dfabric.dli.main=net.fabricmc.loader.launch.knot.KnotClient" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/run/" />
     <method v="2">
       <option name="Make" enabled="true" />
