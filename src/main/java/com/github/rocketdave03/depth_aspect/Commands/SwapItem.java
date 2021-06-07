@@ -1,38 +1,77 @@
 package com.github.rocketdave03.depth_aspect.Commands;
 
-import com.mojang.brigadier.CommandDispatcher;
+import com.github.rocketdave03.depth_aspect.DepthAspect;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
-import com.mojang.brigadier.tree.LiteralCommandNode;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.command.EntitySelector;
+import net.minecraft.command.argument.EntityArgumentType;
+import net.minecraft.command.argument.ItemStackArgument;
+import net.minecraft.command.argument.ItemStackArgumentType;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
-import static com.mojang.brigadier.builder.LiteralArgumentBuilder.literal;
+import java.util.List;
+
 
 public class SwapItem {
+//	public static int giveDiamond(CommandContext<Object> context) throws CommandSyntaxException {
+//		final ServerCommandSource source = (ServerCommandSource) context.getSource();
+//
+//		final PlayerEntity self = source.getPlayer(); // If not a player than the command ends
+//		if(!self.inventory.insertStack(new ItemStack(Items.DIAMOND))){
+//			throw new SimpleCommandExceptionType(new TranslatableText("inventory.isfull")).create();
+//		}
+//
+//		return 1;
+//	}
 
-	public static LiteralCommandNode register(CommandDispatcher<Object> dispatcher) { // You can also return a LiteralCommandNode for use with possible redirects
-		return dispatcher.register(literal("giveMeDiamond")
-				.executes(SwapItem::giveDiamond));
+	public static int hasPermission(CommandContext<ServerCommandSource> context) throws CommandSyntaxException
+	{
+		final ServerCommandSource source = context.getSource();
+		boolean hasPerms = source.hasPermissionLevel(2);
+		if(hasPerms)
+		{
+			return 1;
+		}
+		throw new SimpleCommandExceptionType(new TranslatableText("commands.help.failed")).create();
+
 	}
 
-	public static int giveDiamond(CommandContext<Object> ctx) throws CommandSyntaxException {
-		final ServerCommandSource source = (ServerCommandSource) ctx.getSource();
-
-		final PlayerEntity self = source.getPlayer(); // If not a player than the command ends
-		if(!self.inventory.insertStack(new ItemStack(Items.DIAMOND))){
-			throw new SimpleCommandExceptionType(new TranslatableText("inventory.isfull")).create();
+	public static int swapItems(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+		final ServerCommandSource source = context.getSource();
+		List<ServerPlayerEntity> players = context.getArgument("Player", EntitySelector.class).getPlayers(source);
+		if(players.size() <= 0)
+		{
+			throw new SimpleCommandExceptionType(new TranslatableText("argument.player.unknown")).create();
 		}
 
-		return 1;
-	}
 
+		for (ServerPlayerEntity player : players) {
 
-	public static int tiom(CommandContext<ServerCommandSource> context) {
+			ItemStackArgument itemAArg = context.getArgument("Item A", ItemStackArgument.class);
+			ItemStackArgument itemBArg = context.getArgument("Item B", ItemStackArgument.class);
+
+			ItemStack itemA = itemAArg.getItem().getDefaultStack();
+			ItemStack itemB = itemBArg.getItem().getDefaultStack();
+
+			while(player.inventory.getSlotWithStack(itemA) != -1)
+			{
+				int slot =  player.inventory.getSlotWithStack(itemA);
+				int count = player.inventory.getStack(slot).getCount();
+
+				player.inventory.removeStack(slot);
+
+				ItemStack stack = itemB.copy();
+				stack.setCount(count);
+				player.inventory.setStack(slot, stack);
+			}
+		}
 		return 1;
 	}
 }

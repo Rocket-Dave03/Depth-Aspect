@@ -1,0 +1,1 @@
+swapitems @a depth_aspect:requis minecraft:golden_apple

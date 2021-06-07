@@ -1,5 +1,6 @@
 package com.github.rocketdave03.depth_aspect.mixin;
 
+import com.github.rocketdave03.depth_aspect.DepthAspect;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
@@ -17,7 +18,7 @@ public abstract class GrindGoldenApple {
 	private void grind(ItemStack item, int damage, int amount, CallbackInfoReturnable<ItemStack> cir) {
 		if(item.copy().isItemEqual(Items.ENCHANTED_GOLDEN_APPLE.getDefaultStack()))
 		{
-			ItemStack stack = Items.GOLDEN_APPLE.getDefaultStack().copy();
+			ItemStack stack = DepthAspect.REQUIS.getDefaultStack().copy();
 			stack.setCount(1);
 
 			cir.setReturnValue(stack);
