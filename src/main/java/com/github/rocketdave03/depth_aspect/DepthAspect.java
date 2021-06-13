@@ -9,21 +9,25 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class DepthAspect implements ModInitializer
 {
 
 	public static final Item REQUIS = new Item(new FabricItemSettings());
-
+	public static final Logger LOGGER = LogManager.getLogger("Depth Aspect");
 
 	@Override
 	public void onInitialize()
 	{
+
 		System.out.println("Hello Fabric world!");
 
 		Registry.register(Registry.ITEM, new Identifier("depth_aspect", "requis"), REQUIS);
 		FuelRegistry.INSTANCE.add(Blocks.MAGMA_BLOCK,600);
+
 
 		Commands.registerCommands();
 
