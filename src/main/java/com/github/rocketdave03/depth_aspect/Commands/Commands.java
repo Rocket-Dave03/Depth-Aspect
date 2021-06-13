@@ -1,21 +1,21 @@
 package com.github.rocketdave03.depth_aspect.Commands;
 
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+
 import com.mojang.brigadier.tree.ArgumentCommandNode;
 import com.mojang.brigadier.tree.LiteralCommandNode;
+
+import net.minecraft.command.argument.ItemStackArgumentType;
+import net.minecraft.command.argument.ItemStackArgument;
 import net.minecraft.command.EntitySelector;
 import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.command.argument.IdentifierArgumentType;
-import net.minecraft.command.argument.ItemStackArgument;
-import net.minecraft.command.argument.ItemStackArgumentType;
-import net.minecraft.server.command.*;
+import net.minecraft.server.command.CommandManager;
+import net.minecraft.server.command.ServerCommandSource;
 
 
 public class Commands {
-
-	public static <EntityArgument> void registerCommands()
+	public static void registerCommands()
 	{
-
 		CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
 
 			//Swap Items Command
@@ -48,20 +48,16 @@ public class Commands {
 			{
 				LiteralCommandNode<ServerCommandSource> requis = CommandManager
 					.literal("requis")
-					.executes(Advancement::requis)
+					.build();
+
+				ArgumentCommandNode<ServerCommandSource,EntitySelector> entityNode = CommandManager
+					.argument("Player",EntityArgumentType.entities())
+					.executes(RequisAdvancement::check)
 					.build();
 
 				dispatcher.getRoot().addChild(requis);
+				requis.addChild(entityNode);
 			}
-
-
-
-
-
-
-
-
-
 		});
 	}
 }

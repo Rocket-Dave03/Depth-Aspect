@@ -1,9 +1,9 @@
 package com.github.rocketdave03.depth_aspect.mixin;
 
+
 import com.github.rocketdave03.depth_aspect.DepthAspect;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.screen.GrindstoneScreenHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,6 +20,8 @@ public abstract class GrindGoldenApple {
 		{
 			ItemStack stack = DepthAspect.REQUIS.getDefaultStack().copy();
 			stack.setCount(1);
+
+
 
 			cir.setReturnValue(stack);
 			cir.cancel();

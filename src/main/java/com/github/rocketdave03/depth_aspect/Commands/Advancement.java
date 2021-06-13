@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
+import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 import net.minecraft.advancement.AdvancementProgress;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.CommandSource;
+import net.minecraft.command.EntitySelector;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.TranslatableText;
@@ -62,9 +64,19 @@ public class Advancement {
 	public static int requis(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
 		final ServerCommandSource source = context.getSource();
 
+		List<ServerPlayerEntity> players = context.getArgument("Player", EntitySelector.class).getPlayers(source);
 
-		ArrayList<ServerPlayerEntity> players = new ArrayList<>();
-		players.add(source.getPlayer());
+		return requis(context, players);
+	}
+
+	public static int requis(CommandContext<ServerCommandSource> context, List<ServerPlayerEntity> players) throws CommandSyntaxException {
+		final ServerCommandSource source = context.getSource();
+
+		if(players.size() <= 0)
+		{
+			throw new SimpleCommandExceptionType(new TranslatableText("argument.player.unknown")).create();
+		}
+
 
 		executeAdvancement(
 			source,

@@ -43,27 +43,20 @@ public class SwapItem {
 
 	}
 
-	public static int swapItems(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+	public static int swapItems(CommandContext<ServerCommandSource> context,List<ServerPlayerEntity> players, ItemStack itemA, ItemStack itemB) throws CommandSyntaxException {
 		final ServerCommandSource source = context.getSource();
-		List<ServerPlayerEntity> players = context.getArgument("Player", EntitySelector.class).getPlayers(source);
 		if(players.size() <= 0)
 		{
 			throw new SimpleCommandExceptionType(new TranslatableText("argument.player.unknown")).create();
 		}
 
-
+		int totalCount = 0;
 		for (ServerPlayerEntity player : players) {
-
-			ItemStackArgument itemAArg = context.getArgument("Item A", ItemStackArgument.class);
-			ItemStackArgument itemBArg = context.getArgument("Item B", ItemStackArgument.class);
-
-			ItemStack itemA = itemAArg.getItem().getDefaultStack();
-			ItemStack itemB = itemBArg.getItem().getDefaultStack();
-
 			while(player.inventory.getSlotWithStack(itemA) != -1)
 			{
 				int slot =  player.inventory.getSlotWithStack(itemA);
 				int count = player.inventory.getStack(slot).getCount();
+				totalCount += count;
 
 				player.inventory.removeStack(slot);
 
@@ -72,6 +65,15 @@ public class SwapItem {
 				player.inventory.setStack(slot, stack);
 			}
 		}
-		return 1;
+		return totalCount;
+	}
+	public static int swapItems(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+
+		List<ServerPlayerEntity> players = context.getArgument("Player", EntitySelector.class).getPlayers(context.getSource());
+
+		ItemStack itemA = context.getArgument("Item A", ItemStackArgument.class).getItem().getDefaultStack();
+		ItemStack itemB = context.getArgument("Item B", ItemStackArgument.class).getItem().getDefaultStack();
+
+		return swapItems(context, players, itemA, itemB);
 	}
 }
