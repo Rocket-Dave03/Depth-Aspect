@@ -40,11 +40,4 @@ public class DepthAspect implements ModInitializer
 		ModCommands.register();
 
 	}
-
-	static void testMethod(ItemEntity itemEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i)
-	{
-	}
-//	static void testMethod(ItemEntity itemEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i)
-//	{
-//	}
 }
