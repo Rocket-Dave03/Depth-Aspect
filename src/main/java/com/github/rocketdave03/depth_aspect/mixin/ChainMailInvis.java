@@ -29,10 +29,9 @@ public abstract class ChainMailInvis<T extends LivingEntity, M extends BipedEnti
 
 
 	@Inject(at = @At("HEAD"), method = "renderArmor", cancellable = true)
-	private void grind(MatrixStack matrices, VertexConsumerProvider vertexConsumers, T livingEntity, EquipmentSlot equipmentSlot, int i, A bipedEntityModel, CallbackInfo ci) {
+	private void renderArmor(MatrixStack matrices, VertexConsumerProvider vertexConsumers, T livingEntity, EquipmentSlot equipmentSlot, int i, A bipedEntityModel, CallbackInfo ci) {
 		ItemStack itemStack = livingEntity.getEquippedStack(equipmentSlot);
-		if (itemStack.getItem() instanceof ArmorItem) {
-			ArmorItem armorItem = (ArmorItem)itemStack.getItem();
+		if (itemStack.getItem() instanceof ArmorItem armorItem) {
 			if(armorItem.getMaterial() == ArmorMaterials.CHAIN)
 			{
 				if ( livingEntity.getStatusEffect(StatusEffects.INVISIBILITY) != null ) ci.cancel();

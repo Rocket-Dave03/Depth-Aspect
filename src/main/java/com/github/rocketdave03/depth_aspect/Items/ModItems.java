@@ -14,7 +14,6 @@ public class ModItems {
 
 	public static void register()
 	{
-		LOGGER.info("\n\n\nRegistering Items\n\n\n");
 		Registry.register(Registry.ITEM, new Identifier("depth_aspect", "requis"), REQUIS);
 	}
 }
