@@ -1,6 +1,7 @@
 package com.github.rocketdave03.depth_aspect.Entity;
 
 import com.github.rocketdave03.depth_aspect.Entity.Nautilus.NautilusEntity;
+import com.github.rocketdave03.depth_aspect.Entity.Nautilus.NautilusEntityModel;
 import com.github.rocketdave03.depth_aspect.Entity.Nautilus.NautilusEntityRenderer;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -27,7 +28,7 @@ public class ModEntities {
 
 		//Nautilus
 		FabricDefaultAttributeRegistry.register(NAUTILUS, NautilusEntity.createNautilusAttributes());
-		EntityRendererRegistry.INSTANCE.register(NAUTILUS, (dispatcher, context) -> new NautilusEntityRenderer(dispatcher));
+		EntityRendererRegistry.INSTANCE.register(NAUTILUS, context -> new NautilusEntityRenderer(context, new NautilusEntityModel()));
 
 	}
 }

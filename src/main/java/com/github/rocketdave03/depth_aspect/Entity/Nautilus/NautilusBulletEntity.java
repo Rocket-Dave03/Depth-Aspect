@@ -27,7 +27,7 @@ public class NautilusBulletEntity extends ShulkerBulletEntity {
 		LivingEntity livingEntity = entity2 instanceof LivingEntity ? (LivingEntity)entity2 : null;
 		boolean bl = entity.damage(DamageSource.mobProjectile(this, livingEntity).setProjectile(), 4.0F);
 		if (bl) {
-			this.dealDamage(livingEntity, entity);
+			this.applyDamageEffects(livingEntity, entity);
 			if (entity instanceof LivingEntity) {
 				((LivingEntity)entity).addStatusEffect(new StatusEffectInstance(ModEffects.DROWNING, 200));
 			}

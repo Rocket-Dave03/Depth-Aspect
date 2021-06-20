@@ -52,17 +52,17 @@ public class SwapItem {
 
 		int totalCount = 0;
 		for (ServerPlayerEntity player : players) {
-			while(player.inventory.getSlotWithStack(itemA) != -1)
+			while(player.getInventory().getSlotWithStack(itemA) != -1)
 			{
-				int slot =  player.inventory.getSlotWithStack(itemA);
-				int count = player.inventory.getStack(slot).getCount();
+				int slot =  player.getInventory().getSlotWithStack(itemA);
+				int count = player.getInventory().getStack(slot).getCount();
 				totalCount += count;
 
-				player.inventory.removeStack(slot);
+				player.getInventory().removeStack(slot);
 
 				ItemStack stack = itemB.copy();
 				stack.setCount(count);
-				player.inventory.setStack(slot, stack);
+				player.getInventory().setStack(slot, stack);
 			}
 		}
 		return totalCount;

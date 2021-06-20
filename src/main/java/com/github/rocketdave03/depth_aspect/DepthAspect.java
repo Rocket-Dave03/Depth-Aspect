@@ -7,7 +7,6 @@ import com.github.rocketdave03.depth_aspect.Items.ModItems;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,7 +21,6 @@ public class DepthAspect implements ModInitializer
 	{
 
 		System.out.println("Hello Fabric world!");
-
 		//Items
 		ModItems.register();
 		//Blocks

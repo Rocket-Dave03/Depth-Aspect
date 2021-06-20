@@ -5,13 +5,18 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 
+import java.util.ArrayList;
+
 public class NautilusEntityModel extends EntityModel<NautilusEntity> {
 
 	private final ModelPart base;
 
 	public NautilusEntityModel() {
-		base = new ModelPart(this, 0, 0);
-		base.addCuboid(-8, -8, -8, 16, 16, 16);
+		ModelPart.Cuboid cuboid = new ModelPart.Cuboid(-0, -0, -0.5f, -0.5f, -0.5f, 1, 1 ,1, 0, 0,0, false,64,32);
+		ArrayList<ModelPart.Cuboid> cuboids = new ArrayList<>();
+		cuboids.add(cuboid);
+
+		base = new ModelPart(cuboids, null);
 	}
 
 	@Override

@@ -2,12 +2,12 @@ package com.github.rocketdave03.depth_aspect.Util;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.ai.TargetFinder;
+import net.minecraft.entity.ai.NoPenaltyTargeting;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.ai.pathing.Path;
 import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -31,7 +31,6 @@ public class FleeJukebox extends Goal {
 
 	public FleeJukebox(PathAwareEntity mob, float distance, double slowSpeed) {
 
-		System.out.println("Creating a new FleeBlockGoal");
 		this.mob = mob;
 		this.fleeDistance = distance;
 		this.slowSpeed = slowSpeed;
@@ -58,7 +57,7 @@ public class FleeJukebox extends Goal {
 
 				String tag;
 				try {
-					tag = Objects.requireNonNull(e.toTag(new CompoundTag()).getCompound("RecordItem").get("id")).asString();
+					tag = Objects.requireNonNull(e.writeNbt(new NbtCompound()).getCompound("RecordItem").get("id")).asString();
 				} catch (NullPointerException exception)
 				{
 					tag = "";
@@ -66,7 +65,7 @@ public class FleeJukebox extends Goal {
 				if(tag == null) continue;
 				if (tag.equals( "minecraft:music_disc_cat")) {
 
-					Vec3d vec3d = TargetFinder.findTargetAwayFrom(this.mob, 16, 7, vec3FromBlockPos(p));
+					Vec3d vec3d = NoPenaltyTargeting.find(this.mob, 16, 7, vec3FromBlockPos(p));
 					if (vec3d == null) {
 						return false;
 					} else if ( vec3FromBlockPos(p).squaredDistanceTo(vec3d.x, vec3d.y, vec3d.z) < vec3FromBlockPos(p).squaredDistanceTo(this.mob.getPos())) {
@@ -100,7 +99,7 @@ public class FleeJukebox extends Goal {
 		//if (this.mob.squaredDistanceTo(this.targetBlock) < 49.0D) {
 		//	this.mob.getNavigation().setSpeed(this.fastSpeed);
 		//} else {
-			this.mob.getNavigation().setSpeed(this.slowSpeed);
+		this.mob.getNavigation().setSpeed(this.slowSpeed);
 		//}
 
 	}

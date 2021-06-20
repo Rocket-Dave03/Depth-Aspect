@@ -1,5 +1,7 @@
 package com.github.rocketdave03.depth_aspect.Commands;
 
+import com.github.rocketdave03.depth_aspect.Commands.Advancement.Operation;
+import com.github.rocketdave03.depth_aspect.Commands.Advancement.Selection;
 import com.google.common.collect.Lists;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
