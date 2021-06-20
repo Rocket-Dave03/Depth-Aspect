@@ -4,6 +4,7 @@
   "package": "com.github.rocketdave03.depth_aspect.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ChainMailInvis"
   ],
   "client": [
     "GoldenAppleIsEnchanted",
